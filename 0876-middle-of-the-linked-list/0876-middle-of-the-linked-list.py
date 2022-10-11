@@ -1,14 +1,14 @@
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        c = 0
+        count = 0
         tmp = head
         while tmp:
-            c+=1
+            count+=1
             tmp = tmp.next
             
-        c = c//2
+        middle = count//2
         l = 0
-        while l < c:
+        while l < middle:
             head = head.next
             l+=1
         return head
