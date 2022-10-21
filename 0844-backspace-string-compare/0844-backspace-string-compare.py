@@ -17,5 +17,4 @@ class Solution:
             else:
                 t_backspaced.append(t[i])
         
-        print(s_backspaced, t_backspaced)
         return s_backspaced == t_backspaced
