@@ -6,5 +6,5 @@ class Solution(object):
         while len(sl) >= 2:
             y = sl.pop()
             x = sl.pop()
-            if y > x: sl.add(y - x)  # Note that sl is a SortedList
+            if y > x: sl.add(y - x)
         return sl.pop() if len(sl) else 0
