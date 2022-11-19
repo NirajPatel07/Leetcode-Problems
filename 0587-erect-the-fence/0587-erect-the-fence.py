@@ -1,24 +1,25 @@
-class Solution:
-    def outerTrees(self, trees: List[List[int]]) -> List[List[int]]:
+import itertools
 
-        def check_clockwise(p1,p2,p3):
-            x1,y1 = p1
-            x2,y2 = p2
-            x3,y3 = p3
-            
-            return (y3-y2)*(x2-x1)-(y2-y1)*(x3-x2) #return <0 if clockwise
-        
-        trees.sort()
-        upper = []
-        lower = []
-        
-        for t in trees:
-            while len(upper)>1 and check_clockwise(upper[-1],upper[-2],t)>0:
-                upper.pop()
-            while len(lower)>1 and check_clockwise(lower[-1],lower[-2],t)<0:
-                lower.pop()
-            
-            upper.append(tuple(t))
-            lower.append(tuple(t))
-        
-        return list(set(upper+lower))
+# Monotone Chain Algorithm
+class Solution(object):
+    def outerTrees(self, points):
+	
+        def ccw(A, B, C):
+            return (B[0]-A[0])*(C[1]-A[1]) - (B[1]-A[1])*(C[0]-A[0])
+
+        if len(points) <= 1:
+            return points
+
+        hull = []
+        points.sort()
+        for i in itertools.chain(range(len(points)), reversed(range(len(points)-1))):
+            while len(hull) >= 2 and ccw(hull[-2], hull[-1], points[i]) < 0:
+                hull.pop()
+            hull.append(points[i])
+        hull.pop()
+
+        for i in range(1, (len(hull)+1)//2):
+            if hull[i] != hull[-1]:
+                break
+            hull.pop()
+        return hull
