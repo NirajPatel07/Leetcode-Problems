@@ -1,5 +1,6 @@
 class Solution:
     def halvesAreAlike(self, s: str) -> bool:
+        '''
         n = len(s)
         mid = n//2
         a = s[:mid]
@@ -19,4 +20,21 @@ class Solution:
             if c in vowels:
                 b_vowel+=b_count[c]
                 
+        return a_vowel == b_vowel '''
+        
+        vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        right = len(s)-1
+        left = 0
+        a_vowel = 0
+        b_vowel = 0
+        
+        while left<right:
+            if s[left] in vowels:
+                a_vowel+=1
+            if s[right] in vowels:
+                b_vowel+=1
+            left+=1
+            right-=1
+        
         return a_vowel == b_vowel
+        
