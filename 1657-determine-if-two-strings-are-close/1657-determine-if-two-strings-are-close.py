@@ -1,9 +1,9 @@
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        count_w1 = Counter(word1)
-        count_w2 = Counter(word2)
+        c1=Counter(word1)
+        c2=Counter(word2)
         
-        keys_compare = sorted(count_w1.keys()) == sorted(count_w2.keys())
-        vaules_compare = sorted(count_w1.values()) == sorted(count_w2.values())
-                                                             
-        return keys_compare and vaules_compare
+        n1=Counter(c1.values())
+        n2=Counter(c2.values())
+        
+        return c1==c2 or (n1==n2 and set(word1)==set(word2))
