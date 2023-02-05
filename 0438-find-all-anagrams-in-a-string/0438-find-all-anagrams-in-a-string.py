@@ -1,29 +1,30 @@
 class Solution:
-    def findAnagrams(self, source_string: str, target_string: str) -> List[int]:
-        result = []
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        res = []
+        
+        # count of chars in target
+        p_count = Counter(p) 
+        
+        # count of chars in initial window of source string
+        s_window_count = Counter(s[:len(p)])  
+        
+        # loop through source string to compare each window with target
+        for i in range(len(s) - len(p)):
+            if p_count == s_window_count:
+                res.append(i)
 
-        # store count of each character in target_string
-        target_counter = Counter(target_string)
-        # store count of each character in the first window of source_string
-        source_window_counter = Counter(source_string[:len(target_string)])
+            # decrement count for the char which is left out of the window
+            s_window_count[s[i]] -= 1
 
-        for i in range(len(source_string) - len(target_string)):
-            # check if current window is an anagram of target_string
-            if target_counter == source_window_counter:
-                result.append(i)
+            # remove char count if it becomes zero
+            if s_window_count[s[i]] == 0:
+                del s_window_count[s[i]]
 
-            # decrease count of left edge character
-            source_window_counter[source_string[i]] -= 1
+            # increment count for the char which is included in the window
+            s_window_count[s[i + len(p)]] += 1
 
-            # remove character if count reaches 0
-            if source_window_counter[source_string[i]] == 0:
-                del source_window_counter[source_string[i]]
-
-            # increase count of right edge character
-            source_window_counter[source_string[i + len(target_string)]] += 1
-
-        # check if last window is an anagram of target_string
-        if target_counter == source_window_counter:
-            result.append(len(source_string) - len(target_string))
+        # check if last window is anagram or not
+        if p_count == s_window_count:
+            res.append(len(s) - len(p))
             
-        return result
+        return res
