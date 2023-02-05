@@ -1,23 +1,29 @@
 class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
-        res = []
+    def findAnagrams(self, source_string: str, target_string: str) -> List[int]:
+        result = []
 
-        p_counter = Counter(p)
-        s_counter = Counter(s[:len(p)])
+        # store count of each character in target_string
+        target_counter = Counter(target_string)
+        # store count of each character in the first window of source_string
+        source_window_counter = Counter(source_string[:len(target_string)])
 
-        for i in range(len(s) - len(p)):
+        for i in range(len(source_string) - len(target_string)):
+            # check if current window is an anagram of target_string
+            if target_counter == source_window_counter:
+                result.append(i)
 
-            if p_counter == s_counter:
-                res.append(i)
+            # decrease count of left edge character
+            source_window_counter[source_string[i]] -= 1
 
-            s_counter[s[i]] -= 1
+            # remove character if count reaches 0
+            if source_window_counter[source_string[i]] == 0:
+                del source_window_counter[source_string[i]]
 
-            if s_counter[s[i]] == 0:
-                del s_counter[s[i]]
+            # increase count of right edge character
+            source_window_counter[source_string[i + len(target_string)]] += 1
 
-            s_counter[s[i + len(p)]] += 1
-
-        if p_counter == s_counter:
-            res.append(len(s) - len(p))
+        # check if last window is an anagram of target_string
+        if target_counter == source_window_counter:
+            result.append(len(source_string) - len(target_string))
             
-        return res
+        return result
