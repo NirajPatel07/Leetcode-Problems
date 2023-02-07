@@ -1,17 +1,27 @@
+from collections import defaultdict
+
 class Solution:
     def totalFruit(self, fruits):
+        # Fruit count in baskets
         basket = defaultdict(int)
-        j = 0
-        i = 0
-        res = 0
-        for i in range(len(fruits)):
-            basket[fruits[i]] += 1
-            while len(basket) > 2:
-                basket[fruits[j]] -= 1
-                if basket[fruits[j]] == 0:
-                    del basket[fruits[j]]
-                j += 1
-                
-            res = max(res, i - j + 1)
-        return res
         
+        # Pointers to keep track of subarray
+        l, r = 0, 0
+        
+        # Max number of fruits that can be picked
+        max_fruits = 0
+        
+        # Iterate through fruit array
+        for r in range(len(fruits)):
+            basket[fruits[r]] += 1
+            
+            # If there is more then 2 fruits
+            while len(basket) > 2:
+                basket[fruits[l]] -= 1
+                if basket[fruits[l]] == 0:
+                    del basket[fruits[l]]
+                l += 1
+                
+            max_fruits = max(max_fruits, r - l + 1)
+            
+        return max_fruits
