@@ -20,8 +20,10 @@ class Solution:
 
             # If number of days needed to transport all packages is greater than given days,
             # increase capacity by setting left = mid + 1. Otherwise, decrease capacity by setting right = mid.
-            if need > days: left = mid + 1
-            else: right = mid
+            if need > days: 
+                left = mid + 1
+            else: 
+                right = mid
 
         # Return left pointer as minimum capacity needed to transport all packages within given number of days.
         return left
