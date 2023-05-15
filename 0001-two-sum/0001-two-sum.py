@@ -3,9 +3,9 @@ class Solution:
         lookup = {}
         
         for i in range(len(nums)):
-            rem = target - nums[i]
-            if rem in lookup:
-                return [i, lookup[rem]]
+            remaining = target - nums[i]
+            if remaining in lookup:
+                return [i, lookup[remaining]]
             else:
                 lookup[nums[i]] = i
         
