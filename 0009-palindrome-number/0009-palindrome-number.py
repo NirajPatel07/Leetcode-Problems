@@ -3,11 +3,12 @@ class Solution:
         if x < 0:
             return False
         
-        reverse_x = 0
         origin = x
+        rev_sum = 0
         
-        while x!= 0:
-            reverse_x = (reverse_x * 10) + (x % 10)
-            x //= 10
-            
-        return reverse_x == origin
+        while origin > 0:
+            rev_sum = (rev_sum * 10) + (origin % 10)
+            origin = origin // 10
+        
+        return x == rev_sum
+        
