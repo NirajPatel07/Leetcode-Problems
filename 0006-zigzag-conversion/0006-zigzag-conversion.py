@@ -4,7 +4,6 @@ class Solution:
             return s
         
         rows = [''] * numRows
-        
         index, step = 0, 1
         
         for c in s:
@@ -14,6 +13,5 @@ class Solution:
             elif index == numRows-1:
                 step = -1
             index += step
-        
         
         return ''.join(rows)
