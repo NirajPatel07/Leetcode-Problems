@@ -1,14 +1,20 @@
 class Solution:
     def reverse(self, x: int) -> int:
-        reverse = 0
-        n=abs(x)
+        negative = False
+        if x < 0:
+            x = x * -1
+            negative = True
+            
+        rev_num = 0
         
-        while n:
-            reverse = reverse*10 + n%10
-            n = n//10
+        while x > 0:
+            rev_num = rev_num * 10 + x%10
+            x = x//10
+            
+        if negative:
+            rev_num  = -1 * rev_num
         
-        if reverse > 2**31:
+        if rev_num > (2**31 - 1) or rev_num < (-1 * 2**31 - 1):
             return 0
-        if x<0:
-            return -reverse
-        return reverse
+        
+        return rev_num
