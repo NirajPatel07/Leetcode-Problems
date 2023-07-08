@@ -1,14 +1,17 @@
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        if x < 0:
+        if x<0:
             return False
         
         origin = x
-        rev_sum = 0
+        rev_num = 0
         
-        while origin > 0:
-            rev_sum = (rev_sum * 10) + (origin % 10)
-            origin = origin // 10
+        while x > 0:
+            rev_num = rev_num*10 + x%10
+            x = x//10
+            
+        if rev_num == origin:
+            return True
         
-        return x == rev_sum
+        return False
         
