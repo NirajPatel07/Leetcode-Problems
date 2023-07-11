@@ -16,7 +16,7 @@ var romanToInt = function(s) {
     let res = 0;
     
     for(let i = 0; i < s.length; i++){
-        if (lookup[s[i+1]] > lookup[s[i]]){
+        if (i<s.length-1 && lookup[s[i+1]] > lookup[s[i]]){
             res -= lookup[s[i]];
         } else {
             res += lookup[s[i]];
