@@ -3,13 +3,16 @@ class Solution:
         if not strs:
             return ""
         
-        sorted_list = sorted(strs, key=len)
-        print(sorted_list)
+        prefix = strs[0]
         
-        for i, c in enumerate(sorted_list[0]):
-            for s in sorted_list[1:]:
-                if s[i] != c:
-                    return sorted_list[0][:i]
+        for word in strs[1:]:
+            while word[:len(prefix)] != prefix:
+                prefix = prefix[:-1]
+                
+                if not prefix:
+                    return ""
         
-        return sorted_list[0]
+        return prefix
+        
+        
         
