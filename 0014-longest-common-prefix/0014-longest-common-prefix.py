@@ -3,11 +3,13 @@ class Solution:
         if not strs:
             return ""
         
-        shortest = min(strs,key=len)
+        sorted_list = sorted(strs, key=len)
+        print(sorted_list)
         
-        for i, ch in enumerate(shortest):
-            for other in strs:
-                if other[i] != ch:
-                    return shortest[:i]
-        return shortest 
+        for i, c in enumerate(sorted_list[0]):
+            for s in sorted_list[1:]:
+                if s[i] != c:
+                    return sorted_list[0][:i]
+        
+        return sorted_list[0]
         
