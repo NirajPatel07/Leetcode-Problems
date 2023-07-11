@@ -13,7 +13,7 @@ class Solution:
         s_integer = 0
         
         for i, c in enumerate(s):
-            if (i < len(s) - 1) and lookup[s[i+1]] > lookup[c]:
+            if i < len(s)-1 and lookup[s[i+1]] > lookup[s[i]]:
                 s_integer -= lookup[c]
             else:
                 s_integer += lookup[c]
