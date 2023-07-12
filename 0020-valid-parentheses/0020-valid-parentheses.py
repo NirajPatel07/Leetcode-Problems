@@ -3,11 +3,11 @@ class Solution:
         lookup = {")": "(", "]": "[", "}": "{"}
         stack = []
         
-        for parentheses in s:
-            if parentheses in "([{":
-                stack.append(parentheses)
+        for paren in s:
+            if paren in "([{":
+                stack.append(paren)
             else:
-                if stack and lookup[parentheses] == stack[-1]:
+                if stack and stack[-1]==lookup[paren]:
                     stack.pop()
                 else:
                     return False
