@@ -1,14 +1,9 @@
 class Solution:
-    def generate(self, numRows: int) -> List[List[int]]:
-        op = []
+    def generate(self, n: int) -> List[List[int]]:
+        ans = [[1]*i for i in range(1, n+1)]   
         
-        for i in range(numRows):
-            tmp = [1]
-            for j in range(i):
-                if j == i-1:
-                    tmp.append(1)
-                    break
-                tmp.append(op[-1][j] + op[-1][j+1])
-            op.append(tmp)
-        
-        return op
+        for i in range(1, n):
+            for j in range(1, i):
+                ans[i][j] = ans[i-1][j] + ans[i-1][j-1] 
+                
+        return ans
