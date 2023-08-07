@@ -1,20 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def preorderTraversal(self, root_: TreeNode | None) -> list[int]:
-        # Morris (Destroys the tree)
-        def preorder(root: TreeNode | None) -> Iterable:
-            node = root
-            while node:
-                if node.left is None:
-                    yield node.val
-                    node = node.right
-                    continue
-
-                last = node.left
-                while last.right:
-                    last = last.right
-                last.right = node.right
-
-                yield node.val
-                node = node.left
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        
+        if not root:
+            return root
+        
+        def preorder(root, res):
+            res.append(root.val)
+            
+            if root.left:
+                preorder(root.left, res)
+            
+            if root.right:
+                preorder(root.right, res)
                 
-        return list(preorder(root_))
+        res = []
+        preorder(root, res)
+        
+        return res
