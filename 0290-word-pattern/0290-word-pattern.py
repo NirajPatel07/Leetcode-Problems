@@ -1,17 +1,21 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        if len(pattern) != len(s.split(' ')):
+        lookup = {}
+        s_list = s.split(' ')
+        
+        if len(pattern) != len(s_list):
             return False
         
-        lookup = {}
-        s = s.split(' ')
-        
         for i in range(len(pattern)):
-            if pattern[i] in lookup and lookup[pattern[i]] == s[i]:
-                continue
-            elif pattern[i] not in lookup and s[i] not in lookup.values():
-                lookup[pattern[i]] = s[i]
+            if pattern[i] in lookup:
+                if lookup[pattern[i]] == s_list[i]:
+                    continue
+                else:
+                    return False
             else:
-                return False
+                if s_list[i] in lookup.values():
+                    return False
+                
+                lookup[pattern[i]] = s_list[i]
         
         return True
