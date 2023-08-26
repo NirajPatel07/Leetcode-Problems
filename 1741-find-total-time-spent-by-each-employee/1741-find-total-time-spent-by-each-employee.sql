@@ -1,4 +1,3 @@
-SELECT event_day AS day, emp_id, 
-SUM(out_time) - SUM(in_time) AS total_time
-FROM employees
-GROUP BY emp_id, day ;
+# Write your MySQL query statement below
+
+select event_day as day, emp_id, sum(out_time)-sum(in_time) as total_time from Employees group by emp_id, event_day order by event_day;
