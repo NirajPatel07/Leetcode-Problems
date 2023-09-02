@@ -1,19 +1,20 @@
 class Solution:
-    def minExtraChar(self, s: str, dictionary: List[str]) -> int:
-        
-        @cache
+    def func(self, idx, s, st, dp):
+        if idx == len(s):
+            return 0
+        if dp[idx] != -1:
+            return dp[idx]
+        res = float('inf')
+        for j in range(idx, len(s)):
+            substr = s[idx:j + 1]
+            if substr in st:
+                res = min(res, 0 + self.func(j + 1, s, st, dp))
+            else:
+                res = min(res, j - idx + 1 + self.func(j + 1, s, st, dp))
+        dp[idx] = res
+        return res
 
-        def dfs(s):
-            if not s:
-                return 0
-            ans=inf
-            for i in range(len(s)):
-                sub=s[:i+1]
-                if sub in seen:
-                    ans=min(ans,dfs(s[i+1:]))
-                else:
-                    ans=min(ans,len(sub)+dfs(s[i+1:]))
-            return ans
-        
-        seen=set(dictionary)
-        return dfs(s)
+    def minExtraChar(self, s, dictionary):
+        dp = [-1] * (len(s) + 1)
+        st = set(dictionary)
+        return self.func(0, s, st, dp)
