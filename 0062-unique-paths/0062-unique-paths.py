@@ -1,17 +1,22 @@
 class Solution:
-    dp = dict()
     def uniquePaths(self, m: int, n: int) -> int:
-        if m > n:
-            r = m
-            c = n
-        else:
-            r = n
-            c = m
+        
+        dp = [[-1 for _ in range(n+1)] for _ in range(m+1)]
+        
+        def path_explorer(row, column):
+            if row == 1 and column == 1:
+                return 1
             
-        if r == 1 or c == 1:
-            return 1
-
-        if (r, c) not in self.dp:
-            self.dp[(r, c)] = self.uniquePaths(r - 1, c) + self.uniquePaths(r, c - 1)
-
-        return self.dp[(r,c)]
+            if row == 0 or column == 0:
+                return 0
+            
+            if dp[row][column] != -1:
+                return dp[row][column]
+            
+            dp[row][column] = path_explorer(row-1, column) + path_explorer(row, column-1)
+            
+            return dp[row][column]
+        
+        result = path_explorer(m, n)
+        
+        return result
