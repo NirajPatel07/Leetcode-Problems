@@ -9,7 +9,8 @@ class Solution:
         if not head:
             return False
         
-        slow, fast = head, head.next
+        slow = head
+        fast = head.next
         
         while fast and fast.next:
             if slow == fast:
@@ -18,4 +19,3 @@ class Solution:
             fast = fast.next.next
         
         return False
-            
