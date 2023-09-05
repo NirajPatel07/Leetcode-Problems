@@ -1,1 +1,1 @@
-select name from Employee where id in (select managerId from Employee Group by managerId having count(managerId) >= 5);
+select name from Employee where id in (select managerId from Employee Group by managerId having count(id) >= 5);
