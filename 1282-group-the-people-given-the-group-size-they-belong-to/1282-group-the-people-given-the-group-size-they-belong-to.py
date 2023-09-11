@@ -1,25 +1,15 @@
 class Solution:
     def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
         groups = {}
-        
-        for i in range(len(groupSizes)):
-            if groupSizes[i] in groups:
-                if len(groups[groupSizes[i]][0]) < groupSizes[i]:
-                    groups[groupSizes[i]][0].append(i)
-                else:
-                    flag = True
-                    for arr in groups[groupSizes[i]]:
-                        if len(arr) < groupSizes[i]:
-                            arr.append(i)
-                            flag = False
-                    
-                    if flag:
-                        groups[groupSizes[i]].append([i])
-            else:
-                groups[groupSizes[i]] = [[i]]
-                
         res = []
-        for key, value in groups.items():
-            res.extend(value)
         
+        for i, size in enumerate(groupSizes):
+            if size not in groups:
+                groups[size] = []
+            groups[size].append(i)
+            
+            if len(groups[size]) == size:
+                res.append(groups[size])
+                groups[size] = []
+            
         return res
