@@ -19,7 +19,6 @@ class Solution:
                 groups[groupSizes[i]] = [[i]]
                 
         res = []
-        
         for key, value in groups.items():
             res.extend(value)
         
