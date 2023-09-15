@@ -16,4 +16,4 @@ class Solution:
                 n2 -= 1
             write_index -= 1
             
-        return nums1
+        #return nums1
