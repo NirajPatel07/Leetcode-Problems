@@ -1,25 +1,24 @@
 class Solution:
     def countAndSay(self, n: int) -> str:
-        if n==1: return '1'
+        if n == 1:
+            return '1'
         
-        res = ['1']
-        for i in range(n-1):
+        def say(s):
+            res = ''
             i = 0
-            s = res[-1]
-            curr_s = ''
-            j = 0
-            while i<len(s):
-                c = 0
-                while j<len(s) and s[i] == s[j]:
-                    c+=1
-                    j+=1
-                curr_s += str(c)
-                curr_s += str(s[i])
-                i = j
-                
-            res.append(curr_s)
-        
-        return res[-1]
-                
             
+            while i < len(s):
+                count = 1
+                while i+1 < len(s) and s[i+1] == s[i]:
+                    count += 1
+                    i += 1
+                res += (str(count) + s[i])
+                i += 1
                 
+            return res
+        
+        s = '1'
+        for i in range(n-1):
+            s = say(s)
+        
+        return s
