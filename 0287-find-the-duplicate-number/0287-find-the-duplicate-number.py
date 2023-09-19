@@ -1,9 +1,17 @@
 class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        count = Counter(nums)
+    def findDuplicate(self, nums):
+        first = nums[0]
+        second = nums[0]
         
-        for k, v in count.items():
-            if v > 1:
-                return k
+        while True:
+            first = nums[first]
+            second = nums[nums[second]]
+            if first == second:
+                break
         
-        return -1
+        first = nums[0]
+        while first != second:
+            first = nums[first]
+            second = nums[second]
+        
+        return first
