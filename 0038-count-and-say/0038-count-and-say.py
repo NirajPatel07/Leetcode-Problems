@@ -9,12 +9,12 @@ class Solution:
             
             while i < len(s):
                 count = 1
-                while i+1 < len(s) and s[i+1] == s[i]:
+                while (i + 1) < len(s) and s[i+1] == s[i]:
                     count += 1
                     i += 1
                 res += (str(count) + s[i])
                 i += 1
-                
+            
             return res
         
         s = '1'
