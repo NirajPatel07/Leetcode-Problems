@@ -4,14 +4,12 @@ class Solution:
         def backtrack(nums, index):
             if index >= len(nums):
                 result.append(nums.copy())
-                
-            for j in range(index, len(nums)):
-                nums[index], nums[j] = nums[j], nums[index]
-                backtrack(nums, index+1)
-                nums[index], nums[j] = nums[j], nums[index]
+            
+            for i in range(index, len(nums)):
+                nums[index], nums[i] = nums[i], nums[index]
+                backtrack(nums, index + 1)
+                nums[index], nums[i] = nums[i], nums[index]
                 
         result = []
-        index = 0
-        backtrack(nums, index)
-        
+        backtrack(nums, 0)
         return result
