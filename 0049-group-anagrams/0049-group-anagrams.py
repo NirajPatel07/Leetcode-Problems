@@ -3,10 +3,9 @@ class Solution:
         lookup = {}
         
         for word in strs:
-            word_list = list(word)
-            word_list.sort()
-            
-            curr_word = "".join(word_list)
+            curr_word = list(word)
+            curr_word.sort()
+            curr_word = ''.join(curr_word)
             
             if curr_word in lookup:
                 lookup[curr_word].append(word)
@@ -14,7 +13,7 @@ class Solution:
                 lookup[curr_word] = [word]
                 
         output = []
-        for word_list in lookup:
-            output.append(lookup[word_list])
-            
+        for key, value in lookup.items():
+            output.append(value)
+        
         return output
