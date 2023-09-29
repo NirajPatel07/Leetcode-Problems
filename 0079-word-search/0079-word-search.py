@@ -1,39 +1,30 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
+        row = len(board)
+        col = len(board[0])
+        path = set()
         
-        m = len(board)
-        n = len(board[0])
-        p = len(word)
-        
-        if m*n < p:
-            return False
-        
-        board_set = set(board[i][j] for i in range(m) for j in range(n))
-        word_set = set(c for c in word)
-        if len(board_set) < len(word_set):
-            return False
-        
-        
-        def check_char(i, j, k, resting):
-            if k >= p:
+        def search_word(r, c, idx):
+            if idx == len(word):
                 return True
             
-            if p-1-k > resting:
+            if (r<0 or c<0 or r>=row or c>=col or (r, c) in path or board[r][c] != word[idx]):
                 return False
             
-            if i >= 0 and i < m and j >= 0 and j < n and board[i][j] == word[k]:
-                board[i][j] = None
-                directions = [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]
-                if any(check_char(ii, jj, k+1, resting-1) for ii, jj in directions):
-                    return True
-                board[i][j] = word[k]
-                
-            return False
-                
+            path.add((r,c))
+            res = (
+                search_word(r+1, c, idx+1) or
+                search_word(r, c+1, idx+1) or
+                search_word(r-1, c, idx+1) or
+                search_word(r, c-1, idx+1)
+                  )
+            path.remove((r,c))
+            
+            return res
         
-        for i in range(m):
-            for j in range(n):
-                if check_char(i, j, 0, m*n):
+        for r in range(row):
+            for c in range(col):
+                if search_word(r, c, 0):
                     return True
                 
         return False
