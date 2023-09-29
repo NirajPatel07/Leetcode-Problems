@@ -5,20 +5,19 @@ class Solution:
         
         res = [[] for _ in range(numRows)]
         row = 0
-        step = 1
+        sign = 1
         
         for c in s:
             res[row].append(c)
-            row += step
-            if row == numRows or row < 0:
-                step *= -1
-                row += (step * 2)
-                
-        result = ''
-        
-        for row in res:
-            result += ''.join(row)
+            row += sign
             
+            if row == numRows or row == -1:
+                sign *= -1
+                row += (2*sign)
+            
+        result = ''
+        for char_list in res:
+            result += ''.join(char_list)
+        
         return result
-        
-        
+            
