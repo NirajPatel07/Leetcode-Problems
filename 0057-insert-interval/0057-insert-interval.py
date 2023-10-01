@@ -11,7 +11,6 @@ class Solution:
             elif i > 0 and intervals[i-1][0] <= newInterval[0] <= intervals[i][0]:
                 intervals.insert(i, newInterval)
         
-        print(intervals)
         result = []
         
         for start, end in intervals:
