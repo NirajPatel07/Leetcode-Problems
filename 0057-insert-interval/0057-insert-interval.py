@@ -1,24 +1,25 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        n=newInterval
-        j=intervals
-        i=0
-        m=n[0]
-        m1=n[1]
-        while i<len(j):
-            if n[0] in range(j[i][0],j[i][1]+1) or n[1] in range(j[i][0],j[i][1]+1) or (n[1]>=j[i][1] and n[0]<=j[i][0]):
-                if j[i][0]<m:
-                    m=j[i][0]
-                if j[i][1]>m1:
-                    m1=j[i][1]
-                j.pop(i)
-                if i<=0:
-                    i=0
-                else:
-                    i-=1
+        if not intervals and newInterval:
+            return [newInterval]
+        
+        for i in range(len(intervals)):
+            if i == len(intervals) - 1 and newInterval[0] >= intervals[i][0]:
+                intervals.insert(i+1, newInterval)
+            elif i == 0 and newInterval[0] <= intervals[i][0]:
+                intervals.insert(i, newInterval)
+            elif i > 0 and intervals[i-1][0] <= newInterval[0] <= intervals[i][0]:
+                intervals.insert(i, newInterval)
+        
+        print(intervals)
+        result = []
+        
+        for start, end in intervals:
+            if result and start <= result[-1][1]:
+                result[-1][1] = max(result[-1][1], end)
             else:
-                i+=1
-        s1=[m,m1]
-        j.append(s1)
-        j.sort()
-        return j
+                result.append([start, end])
+        
+        return result
+        
+        
