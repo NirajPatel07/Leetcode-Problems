@@ -5,16 +5,13 @@ class Solution:
         clength = len(colors) - 1
         
         for i in range(1, clength):
-            if colors[i-1] == 'A' and colors[i] == 'A' and colors[i+1] == 'A':
-                a_count += 1
+            if colors[i-1] == colors[i] == colors[i+1]:
                 
-            if colors[i-1] == 'B' and colors[i] == 'B' and colors[i+1] == 'B':
-                b_count += 1
-        
-        if a_count > b_count:
-            return True
-        
-        return False
-        
+                if colors[i] == 'A':
+                    a_count += 1
                 
+                if colors[i] == 'B':
+                    b_count += 1
+        
+        return a_count > b_count
             
