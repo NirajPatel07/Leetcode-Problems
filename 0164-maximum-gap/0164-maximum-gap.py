@@ -12,7 +12,7 @@ class Solution:
         # Calculate the size and count of buckets.
         bucket_size = max(1, (max_val - min_val) // (n - 1))
         bucket_count = (max_val - min_val) // bucket_size + 1
-
+        
         # Initialize the buckets.
         buckets = [[float('inf'), float('-inf')] for _ in range(bucket_count)]
 
