@@ -21,7 +21,7 @@ class Solution:
             index = (num - min_val) // bucket_size
             buckets[index][0] = min(buckets[index][0], num)
             buckets[index][1] = max(buckets[index][1], num)
-
+        
         # Remove empty buckets.
         buckets = [bucket for bucket in buckets if bucket != [float('inf'), float('-inf')]]
 
