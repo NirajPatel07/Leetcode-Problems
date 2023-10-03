@@ -1,9 +1,13 @@
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
-        lookup = Counter(nums)
+        lookup = {}
         count = 0
         
-        for k, v in lookup.items():
-            count += v * (v-1) // 2
-            
+        for n in nums:
+            if n in lookup:
+                count += lookup[n]
+                lookup[n] += 1
+            else:
+                lookup[n] = 1
+                
         return count
