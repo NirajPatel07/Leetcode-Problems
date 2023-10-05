@@ -9,13 +9,14 @@ class Solution:
             return head
         
         stack = []
-        temp = head
         
+        temp = head
         while temp:
             stack.append(temp)
             temp = temp.next
-            
+        
         head = temp = stack.pop()
+        
         while stack:
             temp.next = stack.pop()
             temp = temp.next
