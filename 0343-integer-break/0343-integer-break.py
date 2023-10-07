@@ -1,6 +1,6 @@
 class Solution:
     def integerBreak(self, n: int) -> int:
-        dp = {1: 1}
+        dp = {1:1}
         
         def find_breaks(num):
             if num in dp:
