@@ -1,17 +1,14 @@
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        oddFlag=0
+        count = Counter(s)
+        result = 0
+        odd = False
         
-        count=Counter(s)
-
-        ans=0
-        for k,v in count.items():
-            if v%2==1:
-                ans+=v-1
-                oddFlag= 1
+        for key, value in count.items():
+            if value % 2 == 0:
+                result += value
             else:
-                ans+=v
+                odd = True
+                result += (value - 1)
                 
-        if oddFlag == 1:
-            return ans+1
-        return ans
+        return result + 1 if odd else result
