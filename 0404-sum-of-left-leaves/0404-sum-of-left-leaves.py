@@ -9,15 +9,12 @@ class Solution:
         
         def dfs(root, left):
             if not root:
-                return
+                return 0
             
             if left and not root.left and not root.right:
-                left_leaf.append(root.val)
+                return root.val
             
-            dfs(root.left, True)
-            dfs(root.right, False)
+            return dfs(root.left, True) + dfs(root.right, False)
         
-        left_leaf = []
-        dfs(root, False)
-        return sum(left_leaf)
+        return dfs(root, False)
             
