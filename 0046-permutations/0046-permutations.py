@@ -3,12 +3,10 @@ class Solution:
         result = []
         
         def recursion(nums, index):
-            if index == len(nums):
-                if nums not in result:
-                    result.append(nums.copy())
-                return
+            if index >= len(nums):
+                result.append(nums.copy())
             
-            for i in range(len(nums)):
+            for i in range(index, len(nums)):
                 nums[i], nums[index] = nums[index], nums[i]
                 recursion(nums, index+1)
                 nums[i], nums[index] = nums[index], nums[i]
