@@ -4,7 +4,7 @@ class Solution:
         if len(s) <= 1:
             return s
         
-        def check_palindrome(i, j, s):
+        def palindrome(i, j, s):
             
             while i >= 0 and j < len(s):
                 if s[i] != s[j]:
@@ -15,20 +15,18 @@ class Solution:
             
             return s[i+1:j]
         
-        res = ''
-        
+        result = ""
         for i in range(len(s)-1):
-            p1 = check_palindrome(i, i+1, s)
-            p2 = check_palindrome(i, i, s)
+            string1 = palindrome(i, i+1, s)
+            string2 = palindrome(i, i, s)
             
-            longest = ''
-            if len(p1) > len(p2):
-                longest = p1
+            longest = ""
+            if len(string1) > len(string2):
+                longest = string1
             else:
-                longest = p2
+                longest = string2
                 
-            if len(longest) > len(res):
-                res = longest
-        
-        return res
-                    
+            if len(longest) > len(result):
+                result = longest
+                
+        return result
