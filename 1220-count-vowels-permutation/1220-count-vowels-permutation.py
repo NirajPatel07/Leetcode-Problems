@@ -1,31 +1,16 @@
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
-        MOD = 1000000007
-
-        # Initialize counts for each vowel for length 1
-        a = 1
-        e = 1
-        i = 1
-        o = 1
-        u = 1
-
-        # Iterate from length 1 to n - 1
-        for length in range(1, n):
-            # Calculate the next counts for each vowel based on the previous counts
-            nexta = e
-            nexte = (a + i) % MOD
-            nexti = (a + e + o + u) % MOD
-            nexto = (i + u) % MOD
-            nextu = a
-
-            # Update the counts with the newly calculated values for the next length
-            a = nexta
-            e = nexte
-            i = nexti
-            o = nexto
-            u = nextu
-
-        # Calculate the total count of valid strings for length n
-        sum = (a + e + i + o + u) % MOD
-
-        return int(sum)
+        dp = [[], [1, 1, 1, 1, 1]]
+        a, e, i, o, u = 0, 1, 2, 3, 4
+        mod = 10 ** 9 + 7
+        
+        for j in range(2, n+1):
+            dp.append([0,0,0,0,0])
+            
+            dp[j][a] = (dp[j-1][e] + dp[j-1][i] + dp[j-1][u])
+            dp[j][e] = (dp[j-1][a] + dp[j-1][i])
+            dp[j][i] = (dp[j-1][e] + dp[j-1][o])
+            dp[j][o] = dp[j-1][i]
+            dp[j][u] = dp[j-1][i] + dp[j-1][o]
+        
+        return sum(dp[n]) % mod
