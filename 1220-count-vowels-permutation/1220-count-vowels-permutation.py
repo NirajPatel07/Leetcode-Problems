@@ -7,9 +7,9 @@ class Solution:
         for j in range(2, n+1):
             dp.append([0,0,0,0,0])
             
-            dp[j][a] = (dp[j-1][e] + dp[j-1][i] + dp[j-1][u])
-            dp[j][e] = (dp[j-1][a] + dp[j-1][i])
-            dp[j][i] = (dp[j-1][e] + dp[j-1][o])
+            dp[j][a] = dp[j-1][e] + dp[j-1][i] + dp[j-1][u]
+            dp[j][e] = dp[j-1][a] + dp[j-1][i]
+            dp[j][i] = dp[j-1][e] + dp[j-1][o]
             dp[j][o] = dp[j-1][i]
             dp[j][u] = dp[j-1][i] + dp[j-1][o]
         
