@@ -1,7 +1,8 @@
 class Solution:
-    def poorPigs(self, B, D, T):
-        tmp = log2(B) # number of pigs for one shot
-        t = ceil(T/D) # number of tests we can conduct
-
-        if t == 1: return ceil(tmp) # one shot is the answer
-        return ceil(tmp / log2(t+1)) # re-use pigs until the answer is found (# of tests)
+    def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
+        pigs = 0
+        
+        while (minutesToTest / minutesToDie + 1) ** pigs < buckets:
+            pigs += 1
+        
+        return pigs
