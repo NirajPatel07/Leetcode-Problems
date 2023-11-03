@@ -1,12 +1,15 @@
 class Solution:
-    def buildArray(self, target, n) -> List[str]:
-        i, curr = 0, 1
-        final = []
-        while i < len(target) and curr <= n:
-            final.append("Push")
-            if target[i] == curr:
-                i += 1
+    def buildArray(self, target: List[int], n: int) -> List[str]:
+        i, stream = 0, 1
+        result = []
+        
+        while i < len(target) and stream <= n:
+            result.append('Push')
+            if target[i] != stream:
+                result.append('Pop')
             else:
-                final.append("Pop")
-            curr += 1 
-        return final
+                i += 1
+            stream += 1
+        
+        return result
+        
