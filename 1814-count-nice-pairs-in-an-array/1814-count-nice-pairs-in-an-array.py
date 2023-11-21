@@ -5,6 +5,9 @@ class Solution:
         count = 0
         
         for i in range(len(nums)):
+            # nums[i] + rev(nums[j]) == nums[j] + rev(nums[i])
+            # Is same as
+            # nums[i] - rev(nums[i]) == nums[j] -  rev(nums[j])
             curr = nums[i] - self.reverse(nums[i])
             counter[curr] = counter.get(curr, 0) + 1
         
