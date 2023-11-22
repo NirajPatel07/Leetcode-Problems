@@ -3,8 +3,8 @@ class Solution:
         result = []
         groups = {}
         
-        for row in range(len(nums)):
-            for column in range(len(nums[row])):
+        for row in range(len(nums)-1, -1, -1):
+            for column in range(len(nums[row])-1, -1, -1):
                 diagonal = row + column
                 if diagonal in groups:
                     groups[diagonal].append(nums[row][column])
@@ -13,7 +13,7 @@ class Solution:
         
         curr = 0
         while curr in groups:
-            result.extend(groups[curr][::-1])
+            result.extend(groups[curr])
             curr += 1
         
         return result
