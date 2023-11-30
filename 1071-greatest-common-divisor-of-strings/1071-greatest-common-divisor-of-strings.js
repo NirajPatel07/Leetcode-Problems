@@ -4,6 +4,7 @@
  * @return {string}
  */
 var gcdOfStrings = function(str1, str2) {
+    
     if (str1.length < str2.length){
         let temp = str1;
         str1 = str2;
