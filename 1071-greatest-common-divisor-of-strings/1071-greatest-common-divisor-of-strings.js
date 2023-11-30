@@ -1,21 +1,15 @@
-/**
- * @param {string} str1
- * @param {string} str2
- * @return {string}
- */
 var gcdOfStrings = function(str1, str2) {
-    
-    if (str1.length < str2.length){
-        [str1, str2] = [str2, str1];
+    if(str1 + str2 != str2 + str1) {
+        return ""
     }
-    
-    if (str1 == str2){
-        return str1;
+    let x = str1.length
+    let y = str2.length
+    function gcd(m, n) {
+        if(!n) return m
+        return gcd (n, m % n)
+
     }
+    let div = gcd(x, y)
+    return  str1.slice(0, div)
     
-    if (str1.substring(0, str2.length) !== str2){
-        return "";
-    }
-    
-    return gcdOfStrings(str1.substring(str2.length), str2)
 };
