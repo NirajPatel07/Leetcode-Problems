@@ -1,35 +1,53 @@
+/**
+ * @param {string[]} words
+ * @param {string} chars
+ * @return {number}
+ */
 var countCharacters = function(words, chars) {
-    const counts = new Array(26).fill(0);
-
-    // Step 1: Initialize Character Counts Array
-    for (const ch of chars) {
-        counts[ch.charCodeAt(0) - 'a'.charCodeAt(0)]++;
-    }
-
+    const charCount = {};
     let result = 0;
-
-    // Step 3: Check Words
-    for (const word of words) {
-        if (canForm(word, counts)) {
-            // Step 4: Calculate Lengths
+    
+    for (let char of chars){
+        if (charCount[char]){
+            charCount[char] += 1;
+        }
+        else {
+            charCount[char] = 1;
+        }
+    }
+    
+    for (let word of words){
+        if (formWord(word, charCount)){
             result += word.length;
         }
     }
-
+    
     return result;
-
-    function canForm(word, counts) {
-        const c = new Array(26).fill(0);
-
-        // Step 2: Update Counts Array
-        for (const ch of word) {
-            const x = ch.charCodeAt(0) - 'a'.charCodeAt(0);
-            c[x]++;
-            if (c[x] > counts[x]) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 };
+
+function formWord(word, charCount){
+    const wordCount = {};
+    wordLength = word.length
+    
+    for (let i = 0; i < wordLength; i++){
+        if (wordCount[word[i]]){
+            wordCount[word[i]] += 1;
+        }
+        else {
+            wordCount[word[i]] = 1;
+        }
+        
+        if (!charCount[word[i]] || wordCount[word[i]] > charCount[word[i]]){
+            return false;
+        }
+    }
+    
+    return true;
+}
+    
+    
+    
+    
+    
+    
+    
