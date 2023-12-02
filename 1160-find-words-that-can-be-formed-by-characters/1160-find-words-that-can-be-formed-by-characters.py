@@ -1,29 +1,24 @@
-class Solution(object):
-    def countCharacters(self, words, chars):
-        counts = [0] * 26
-
-        # Step 1: Initialize Character Counts Array
-        for ch in chars:
-            counts[ord(ch) - ord('a')] += 1
-
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        char_count = Counter(chars)
         result = 0
-
-        # Step 3: Check Words
+        
         for word in words:
-            if self.canForm(word, counts):
-                # Step 4: Calculate Lengths
-                result += len(word)
-
+            word_count = {}
+            word_length = len(word)
+            for i, c in enumerate(word):
+                if c in word_count:
+                    word_count[c] += 1
+                else:
+                    word_count[c] = 1
+                
+                if c not in char_count or word_count[c] > char_count[c]:
+                    break
+                
+                if i == word_length - 1:
+                    result += word_length
+        
         return result
-
-    def canForm(self, word, counts):
-        c = [0] * 26
-
-        # Step 2: Update Counts Array
-        for ch in word:
-            x = ord(ch) - ord('a')
-            c[x] += 1
-            if c[x] > counts[x]:
-                return False
-
-        return True
+                    
+                
+            
