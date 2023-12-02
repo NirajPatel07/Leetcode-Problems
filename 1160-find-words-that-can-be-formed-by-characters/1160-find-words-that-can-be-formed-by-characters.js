@@ -4,11 +4,16 @@
  * @return {number}
  */
 var countCharacters = function(words, chars) {
-    const charCount = new Map();
+    const charCount = {};
     let result = 0;
     
     for (let char of chars){
-        charCount.set(char, (charCount.get(char) || 0) + 1);
+        if (charCount[char]){
+            charCount[char] += 1;
+        }
+        else {
+            charCount[char] = 1;
+        }
     }
     
     for (let word of words){
@@ -22,16 +27,27 @@ var countCharacters = function(words, chars) {
 
 function formWord(word, charCount){
     const wordCount = new Map();
-    const wordLength = word.length;
+    wordLength = word.length
     
     for (let i = 0; i < wordLength; i++){
-        const currentCount = (wordCount.get(word[i]) || 0) + 1;
-        wordCount.set(word[i], currentCount);
+        if (wordCount[word[i]]){
+            wordCount[word[i]] += 1;
+        }
+        else {
+            wordCount[word[i]] = 1;
+        }
         
-        if (!charCount.has(word[i]) || currentCount > charCount.get(word[i])){
+        if (!charCount[word[i]] || wordCount[word[i]] > charCount[word[i]]){
             return false;
         }
     }
     
     return true;
 }
+    
+    
+    
+    
+    
+    
+    
