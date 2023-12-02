@@ -26,7 +26,7 @@ var countCharacters = function(words, chars) {
 };
 
 function formWord(word, charCount){
-    const wordCount = {};
+    const wordCount = new Map();
     wordLength = word.length
     
     for (let i = 0; i < wordLength; i++){
