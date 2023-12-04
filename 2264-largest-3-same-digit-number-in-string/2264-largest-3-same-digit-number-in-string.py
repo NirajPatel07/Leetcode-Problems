@@ -1,11 +1,12 @@
 class Solution:
     def largestGoodInteger(self, num: str) -> str:
-        result = ""
-        idx = 0
+        good_strings = ['000','111','222','333','444','555','666','777','888','999']
+        max_value = []
         
-        for i in range(3, len(num) + 1):
-            if len(set(num[idx:i])) == 1 and num[idx:i] > result:
-                result = num[idx:i]    
-            idx += 1
+        for n in good_strings:
+            if n in num:
+                max_value.append(n)
                 
-        return result
+        max_value.sort()
+        
+        return max_value[-1] if max_value else ""
