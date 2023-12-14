@@ -1,14 +1,35 @@
 class Solution:
     def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
-        n, m = len(grid[0]), len(grid)
-        n_m = n + m
+        matrix = [[0] * len(grid[0]) for _ in range(len(grid))]
         
-        csums2 = tuple(c.count(1) * 2 for c in zip(*grid))
-
-        for i in range(m):
-            rsums2_nm = grid[i].count(1) * 2 - n_m
+        rowZeros, columnZeros, rowOnes, columnOnes = self.gridDifference(grid)
+        
+        for row in range(len(grid)):
+            for column in range(len(grid[0])):
+                matrix[row][column] = rowOnes[row] + columnOnes[column] - rowZeros[row] - columnZeros[column]
+        
+        return matrix
+    
+    def gridDifference(self, grid):
+        rowZeros = []
+        columnZeros = []
+        rowOnes = []
+        columnOnes = []
+        
+        for row in range(len(grid)):
+            rowZeros.append(grid[row].count(0))
+            rowOnes.append(grid[row].count(1))
+        
+        for column in range(len(grid[0])):
             
-            for j in range(n):
-                grid[i][j] = rsums2_nm + csums2[j]
-
-        return grid
+            zeroCount, oneCount = 0, 0
+            for row in range(len(grid)):
+                if grid[row][column] == 1:
+                    oneCount += 1
+                else:
+                    zeroCount += 1
+                    
+            columnZeros.append(zeroCount)
+            columnOnes.append(oneCount)
+        
+        return rowZeros, columnZeros, rowOnes, columnOnes
