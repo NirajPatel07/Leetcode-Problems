@@ -3,15 +3,14 @@ class Solution:
         lookup = {")": "(", "]": "[", "}": "{"}
         stack = []
         
-        for paren in s:
-            if paren in "([{":
-                stack.append(paren)
+        for param in s:
+            if param in "({[":
+                stack.append(param)
             else:
-                if stack and stack[-1]==lookup[paren]:
+                if stack and stack[-1] == lookup[param]:
                     stack.pop()
                 else:
                     return False
         
-        if not stack:
-            return True
-        return False
+        if stack: return False
+        return True
